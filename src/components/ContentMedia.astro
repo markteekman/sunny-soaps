@@ -4,7 +4,7 @@ import { Media } from 'accessible-astro-components'
 const { imgSrc, reverseImg = false } = Astro.props
 ---
 
-<section class="my-64">
+<section class="content-media my-64">
   <div class="container">
     <div class="grid grid-cols-1 gap-24 md:grid-cols-2">
       {!reverseImg ? <Media class="rounded-lg" src={imgSrc} /> : ''}
@@ -15,3 +15,27 @@ const { imgSrc, reverseImg = false } = Astro.props
     </div>
   </div>
 </section>
+
+<style lang="scss" is:global>
+  .content-media {
+    p {
+      text-wrap: pretty;
+    }
+
+    img {
+      max-block-size: 400px;
+      inline-size: 100%;
+      object-fit: cover;
+      border: 10px solid var(--primary-200);
+      filter: drop-shadow(0 0 10px hsla(0 0% 0% / 0.1));
+    }
+
+    .container div:has(img:first-child) img {
+      rotate: -2deg;
+    }
+
+    .container div:has(img:last-child) img {
+      rotate: 2deg;
+    }
+  }
+</style>

@@ -1,34 +1,46 @@
 ---
 import { SkipLinks } from 'accessible-astro-components'
-import { Icon } from 'astro-icon/components'
+import Logo from './Logo.astro'
+import Navigation from './Navigation.astro'
 ---
 
 <header>
   <SkipLinks />
+  <div class="container">
+    <Logo />
+    <Navigation />
+  </div>
+  <div class="backdrop"></div>
 </header>
 
 <style lang="scss" is:global>
   @use '../assets/scss/base/outline' as *;
 
   header {
-    .type-icon a {
-      display: block;
+    position: sticky;
+    inset-block-start: 2rem;
+    inset-inline: 2rem;
+    margin-inline: auto;
+    z-index: 200;
 
-      [data-icon] {
-        height: auto;
-        margin-top: -4px;
-        width: 30px;
+    .container {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      // background-color: var(--primary-300);
+      border: 1px solid var(--primary-500);
+      border-radius: var(--radius-large);
+      z-index: 1;
+    }
 
-        path {
-          fill: var(--action-color);
-        }
-      }
-
-      &:hover {
-        [data-icon] path {
-          fill: var(--action-color-state);
-        }
-      }
+    .backdrop {
+      position: absolute;
+      inset: 0;
+      height: 200%;
+      backdrop-filter: blur(16px);
+      mask-image: linear-gradient(to bottom, black 0% 50%, transparent 50% 100%);
     }
   }
 </style>

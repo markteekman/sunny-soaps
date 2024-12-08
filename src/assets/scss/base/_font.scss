@@ -52,6 +52,17 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Sunny';
+  src:
+    local('Sunny Spells Basic'),
+    url('/fonts/Sunny-Spells-Basic.woff2') format('woff2'),
+    url('/fonts/Sunny-Spells-Basic.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
   font-family: var(--font-family-default);
   text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
@@ -63,7 +74,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 
-  a:not(.button) {
+  main a:not(.button) {
     color: var(--action-color);
     text-decoration: underline;
 
@@ -83,7 +94,7 @@ body {
     word-break: break-word;
   }
 
-  :where(h1, h2) {
+  :where(h1, h2, h3, h4, h5, h6) {
     font-family: var(--font-family-special);
   }
 
@@ -100,62 +111,62 @@ body {
   }
 
   h1 {
-    font-size: 2.25rem;
-    line-height: 3.375rem;
+    font-size: 3rem;
+    line-height: 3.5rem;
 
     @include breakpoint(medium) {
-      font-size: 3rem;
-      line-height: 3.625rem;
+      font-size: 7rem;
+      line-height: 7.5rem;
     }
   }
 
   h2 {
-    font-size: 1.875rem;
-    line-height: 2.8125rem;
+    font-size: 2.5rem;
+    line-height: 3rem;
 
     @include breakpoint(medium) {
-      font-size: 2.25rem;
-      line-height: 3.375rem;
+      font-size: 6rem;
+      line-height: 6.5rem;
     }
   }
 
   h3 {
-    font-size: 1.5rem;
-    line-height: 2.25rem;
+    font-size: 2rem;
+    line-height: 2.5rem;
 
     @include breakpoint(medium) {
-      font-size: 1.875rem;
-      line-height: 2.8125rem;
+      font-size: 3.25rem;
+      line-height: 3.75rem;
     }
   }
 
   h4 {
-    font-size: 1.25rem;
-    line-height: 1.875rem;
+    font-size: 1.75rem;
+    line-height: 2.25rem;
 
     @include breakpoint(medium) {
-      font-size: 1.5rem;
-      line-height: 2.25rem;
+      font-size: 2.5rem;
+      line-height: 3rem;
     }
   }
 
   h5 {
-    font-size: 1.125rem;
-    line-height: 1.6875rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
 
     @include breakpoint(medium) {
-      font-size: 1.25rem;
-      line-height: 1.875rem;
+      font-size: 2rem;
+      line-height: 2.5rem;
     }
   }
 
   h6 {
-    font-size: 1rem;
-    line-height: 1.5rem;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
 
     @include breakpoint(medium) {
-      font-size: 1.125rem;
-      line-height: 1.6875rem;
+      font-size: 1.5rem;
+      line-height: 2rem;
     }
   }
 }

@@ -1,0 +1,58 @@
+---
+import { Icon } from 'astro-icon/components'
+
+interface Feature {
+  text: string
+  icon?: string // Optional icon, defaults to a check if not provided
+}
+
+interface Props {
+  features: (Feature | string)[]
+}
+
+const { features } = Astro.props
+
+// Convert any string items to Feature objects and ensure all items have an icon
+const normalizedFeatures = features.map((feature) => {
+  if (typeof feature === 'string') {
+    return { text: feature, icon: 'mdi:check' }
+  }
+  return { ...feature, icon: feature.icon || 'mdi:check' }
+})
+---
+
+<ul class="features-list">
+  {
+    normalizedFeatures.map((feature) => (
+      <li>
+        <Icon name={feature.icon} class="icon" />
+        <span>{feature.text}</span>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .features-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  li {
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-300);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+  }
+</style>

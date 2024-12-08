@@ -3,13 +3,75 @@ import DefaultLayout from '../layouts/DefaultLayout.astro'
 import Hero from '../components/Hero.astro'
 import Feature from '../components/Feature.astro'
 import ContentMedia from '../components/ContentMedia.astro'
+import Summary from '../components/Summary.astro'
 ---
 
 <DefaultLayout title="Home">
   <Hero />
-  <section class="my-64">
+  <div id="zeepjes">
     <div class="container">
-      <h2 class="mb-16 text-6xl">Features</h2>
+      <h2 class="mb-[-4rem] text-center">Zeepjes</h2>
+    </div>
+    <ContentMedia
+      imgSrc="https://plus.unsplash.com/premium_photo-1671718611585-347e3ceee7f2?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    >
+      <h3>Olive Delight</h3>
+      <p class="text-2xl">
+        De zeep "Olive Delight" is een zeep met een zachte, vloeibare kleur en een frisse, olijfoliegeur.
+      </p>
+      <Summary
+        features={[
+          { text: 'Hydraterend', icon: 'mdi:water' },
+          { text: 'Zeer zacht', icon: 'mdi:leaf' },
+          { text: 'Geurig', icon: 'mdi:smell' },
+        ]}
+      />
+      <p class="price text-3xl font-bold">€3,50</p>
+    </ContentMedia>
+    <ContentMedia
+      imgSrc="https://images.unsplash.com/photo-1454873019514-eae2f086587a?q=80&w=1746&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      reverseImg={true}
+    >
+      <h3>Lavender Dream</h3>
+      <p class="text-2xl">
+        De zeep "Lavender Dream" is een zeep met een zachte, vloeibare kleur en een frisse, olijfoliegeur.
+      </p>
+      <Summary
+        features={[
+          // Skincare & Body related
+          { text: 'Hydraterend', icon: 'mdi:water-outline' },
+          { text: 'Voor je huid', icon: 'mdi:hand-heart-outline' },
+          { text: 'Verzorgend', icon: 'mdi:lotion-outline' },
+
+          // Hair related
+          { text: 'Voor je haar', icon: 'mdi:hair-dryer-outline' },
+
+          // Natural & Ingredients
+          { text: 'Natuurlijk', icon: 'mdi:leaf' },
+          { text: 'Biologisch', icon: 'mdi:sprout-outline' },
+          { text: 'Lavendel', icon: 'mdi:flower-outline' },
+
+          // Effects & Properties
+          { text: 'Kalmerend', icon: 'mdi:peace' },
+          { text: 'Verfrissend', icon: 'mdi:weather-sunny' },
+          { text: 'Geurig', icon: 'mdi:scent' },
+          { text: 'Handgemaakt', icon: 'mdi:hand-heart-outline' },
+
+          // Other
+          { text: 'Hart', icon: 'mdi:heart-outline' },
+          { text: 'Duurzaam', icon: 'mdi:recycle' },
+          { text: 'Spa', icon: 'mdi:spa-outline' },
+          { text: 'Natuur', icon: 'mdi:nature-outline' },
+          { text: 'Bescherming', icon: 'mdi:shield-outline' },
+          { text: 'Verfrissend 2', icon: 'mdi:sparkles-outline' },
+        ]}
+      />
+      <p class="price arrow-right text-3xl font-bold">€3,50</p>
+    </ContentMedia>
+  </div>
+  <section id="kenmerken" class="my-64">
+    <div class="container">
+      <h2 class="mb-16">Features</h2>
       <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
         <Feature icon="mdi:tailwind" title="Tailwind CSS">
           Use the power of Tailwind to greatly improve your productivity and enhance your developer workflow.
@@ -41,21 +103,52 @@ import ContentMedia from '../components/ContentMedia.astro'
       </div>
     </div>
   </section>
-  <ContentMedia imgSrc="/accessible-components.webp">
-    <h2>Accessible Components</h2>
-    <p class="text-2xl">
-      This theme provides plenty of tried and tested Accessible Astro Components. Some are native to this theme and a
-      lot of others are integrated using a <a href="https://github.com/markteekman/accessible-astro-components"
-        >separate package</a
-      >. They'll get you up and running in building an accessible solution for your visitors.
-    </p>
-  </ContentMedia>
-  <ContentMedia imgSrc="/wcag-compliant.webp" reverseImg={true}>
-    <h2>WCAG 2.1 AA Compliant</h2>
-    <p class="text-2xl">
-      Using semantic HTML, landmarks, skip links, screen reader friendly content, aria-labels, keyboard accessible
-      navigation and components, clear outlines and tab indicators and the right color contrast, you're more certain of
-      reaching WCAG AA compliance.
-    </p>
-  </ContentMedia>
+  <div id="over-mij">
+    <ContentMedia
+      imgSrc="https://plus.unsplash.com/premium_photo-1694557636097-5969bae91ba8?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      reverseImg={true}
+    >
+      <h3>Over mij</h3>
+      <p class="text-2xl">
+        Ik ben Elysia, een vrouw die haar leven probeert te vormen aan de hand van natuurlijke producten.
+      </p>
+    </ContentMedia>
+  </div>
 </DefaultLayout>
+
+<style lang="scss">
+  .price {
+    --price-tag-color: palevioletred;
+    --price-tag-shadow: var(--primary-400);
+
+    display: inline-block;
+    background: var(--price-tag-color);
+    padding: 0.5rem 1.5rem;
+    inline-size: fit-content;
+    position: relative;
+    border-radius: var(--radius-small);
+
+    &:before {
+      content: '';
+      position: absolute;
+      background: var(--price-tag-color);
+      width: 1rem;
+      height: 1rem;
+      top: 50%;
+      left: -0.5rem;
+      transform: translateY(-50%) rotate(45deg);
+      border-radius: 0.15rem;
+      box-shadow: 2px 2px 0 var(--price-tag-shadow);
+      z-index: -1;
+    }
+
+    &.arrow-right {
+      align-self: end;
+
+      &:before {
+        left: auto;
+        right: -0.5rem;
+      }
+    }
+  }
+</style>

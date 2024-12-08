@@ -1,47 +1,113 @@
 ---
-import { Icon } from 'astro-icon/components'
 
-const { src = '/astronaut-hero-img.webp' } = Astro.props
 ---
 
-<section class="hero my-24">
-  <div class="container">
-    <div class="grid grid-cols-1 items-center gap-24 lg:grid-cols-2">
-      <div class="flex flex-col items-center gap-8 md:items-start">
-        <h1 class="text-center text-6xl md:text-left lg:text-8xl">
-          <slot><span class="text-gradient">Accessible</span> Starter for Astro</slot>
-        </h1>
-        <div class="flex flex-col gap-3 min-[500px]:flex-row">
-          <a class="button has-icon" href="https://github.com/markteekman/accessible-astro-starter">
-            <Icon name="ion:star-outline" />
-            Star on GitHub
-          </a>
-          <a
-            class="button has-icon color-secondary"
-            href="https://github.com/markteekman/accessible-astro-starter/blob/main/README.md"
-          >
-            <Icon name="ion:bookmark-outline" />
-            Read the Docs
-          </a>
-        </div>
-      </div>
-      <img class="hidden lg:block" src={src} alt="" decoding="async" />
+<section id="hero" class="hero relative">
+  <div class="hero__inner relative z-10">
+    <div class="flex flex-col items-center gap-8">
+      <h1 class="text-center">Sunny Soaps</h1>
+      <p class="text-center text-4xl lg:text-left">Handgemaakte zeepjes met liefde en zorg.</p>
     </div>
+  </div>
+
+  <div class="backlight-wrapper">
+    <div class="backlights"></div>
   </div>
 </section>
 
+<script>
+  console.log('Hero component loaded')
+</script>
+
 <style lang="scss">
-  .text-gradient {
-    background: linear-gradient(315deg, var(--primary-200) 25%, var(--secondary-500));
-    background-clip: border-box;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .hero {
+    --lch-white: 100% 0 0;
+    --lch-black: 0% 0 0;
+    --lch-blue: 69% 0.15 255;
+    --lch-lightblue: 80% 0.1 255;
+    --lch-darkblue: 65% 0.2 255;
+    --lch-indigo: 76% 0.1 276;
+    --lch-violet: 89% 0.06 291;
+
+    --color-white: oklch(var(--lch-white));
+    --color-black: oklch(var(--lch-black));
+
+    --dark-gradient: repeating-linear-gradient(
+      100deg,
+      oklch(var(--lch-black)) 0%,
+      oklch(var(--lch-black)) 7%,
+      transparent 10%,
+      transparent 12%,
+      oklch(var(--lch-black)) 16%
+    );
+    --aurora: repeating-linear-gradient(
+      100deg,
+      oklch(var(--lch-darkblue)) 10%,
+      oklch(var(--lch-indigo)) 15%,
+      oklch(var(--lch-lightblue)) 20%,
+      oklch(var(--lch-violet)) 25%,
+      oklch(var(--lch-blue)) 30%
+    );
+
+    min-height: 100vh;
+    margin-block-start: -5rem;
+    overflow-x: clip;
   }
 
-  :global(.darkmode .text-gradient) {
-    background: linear-gradient(315deg, var(--primary-200) 25%, var(--secondary-400));
-    background-clip: border-box;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .hero__inner {
+    display: grid;
+    place-items: center;
+    padding-block: 2rem;
+    min-block-size: 100dvh;
+    min-inline-size: 100dvw;
+
+    h1 {
+      font-size: clamp(3rem, 10vw, 9rem);
+    }
+  }
+
+  .backlight-wrapper {
+    position: absolute;
+    inset: 0;
+    overflow: clip;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .backlights {
+    position: absolute;
+    inset: -1rem;
+    background-image: var(--dark-gradient), var(--aurora);
+    background-size: 300%, 200%;
+    background-position:
+      50% 50%,
+      50% 50%;
+    mask-image: radial-gradient(ellipse at 100% 0, var(--color-black) 10%, transparent 70%);
+    filter: blur(10px);
+    opacity: 0.5;
+
+    &:after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: var(--dark-gradient), var(--aurora);
+      background-size: 200%, 100%;
+      background-attachment: fixed;
+      animation: aurora 90s linear infinite;
+      mix-blend-mode: difference;
+    }
+  }
+
+  @keyframes aurora {
+    0% {
+      background-position:
+        50% 50%,
+        50% 50%;
+    }
+    100% {
+      background-position:
+        350% 50%,
+        350% 50%;
+    }
   }
 </style>

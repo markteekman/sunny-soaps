@@ -4,7 +4,7 @@ import CallToAction from './CallToAction.astro'
 const currentYear = new Date().getFullYear()
 ---
 
-<footer>
+<footer class="footer relative">
   <CallToAction />
   <section class="py-8">
     <div class="container">
@@ -16,3 +16,10 @@ const currentYear = new Date().getFullYear()
     </div>
   </section>
 </footer>
+
+<style lang="scss">
+  .footer {
+    position: relative;
+    overflow: hidden;
+  }
+</style>

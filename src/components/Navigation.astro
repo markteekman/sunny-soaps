@@ -1,0 +1,72 @@
+---
+
+---
+
+<nav aria-label="Hoofd">
+  <ul>
+    <li><a href="#zeepjes" data-nav-link>Zeepjes</a></li>
+    <li><a href="#kenmerken" data-nav-link>Kenmerken</a></li>
+    <li><a href="#over-mij" data-nav-link>Over mij</a></li>
+  </ul>
+</nav>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        console.log('Section intersecting:', entry.target.id, entry.isIntersecting)
+
+        if (entry.isIntersecting) {
+          // If hero section is intersecting, just remove all active classes
+          if (entry.target.id === 'hero') {
+            document.querySelectorAll('[data-nav-link]').forEach((link) => {
+              link.classList.remove('active')
+            })
+            return
+          }
+
+          // Otherwise, handle other sections as before
+          document.querySelectorAll('[data-nav-link]').forEach((link) => {
+            link.classList.remove('active')
+          })
+
+          const id = entry.target.id
+          const correspondingLink = document.querySelector(`[href="#${id}"]`)
+          console.log('Found link:', id, correspondingLink)
+          if (correspondingLink) {
+            correspondingLink.classList.add('active')
+          }
+        }
+      })
+    },
+    {
+      threshold: 0.2,
+      rootMargin: '-10% 0px',
+    },
+  )
+
+  // Observe all sections including hero
+  ;['hero', 'zeepjes', 'kenmerken', 'over-mij'].forEach((id) => {
+    const section = document.getElementById(id)
+    if (section) observer.observe(section)
+  })
+</script>
+
+<style lang="scss">
+  ul {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  a {
+    padding: 0.5rem 1rem;
+    color: var(--font-color);
+    text-decoration: none;
+    border-radius: var(--radius-large);
+    transition: background-color 0.3s ease;
+
+    &:where(:hover, :focus-visible, &.active) {
+      background-color: palevioletred;
+    }
+  }
+</style>
